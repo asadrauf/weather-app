@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+
+    <!-- Link to bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- link to Custom CSS File -->
+    <link rel="stylesheet" href="style.css">
+
+     <!-------------------Link to FontAwsome------------------------->
+     <script src="https://kit.fontawesome.com/5c588c8e4c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="main-container" id="mainContaier">
+        <section class="header-area" id="headerArea">
+            <div class="row">
+            <div class="col-md-12 py-2">
+            <h2 class="header-text text-center text-light bg-dark py-4">Weather Dashboard</h2>
+            </div> 
+            </div> 
+        </section>
+        <section class="current-weather" id="currentWeather">
+            <div class="row" id="cityArea">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="city" placeholder="Search for a City">
+                          <span class="input-group-btn">
+                            <button class="btn btn-search" type="button" id="submitCity"><i class="fa fa-search fa-fw"></i></button>
+                          </span>
+                    </div>
+                </div>
+                <div class="col-md-9 border border-right-0">
+                    <div style="background:transparent !important" class="jumbotron" id="jumbo">
+                    </div>
+                        <div id="showResult" class="show-result">
+                      </div><div><h3 id="date"></h3></div>
+                      
+                </div>
+            </div>
+        </section>
+        <div class="weather-forecast" id="weatherForecast"></div>
+
+
+    </section>
+    
+
+
+
+    <!-- Link to JQuery Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Link to javaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

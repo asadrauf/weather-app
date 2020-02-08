@@ -1,0 +1,30 @@
+
+body{
+    width: 960px;
+    margin: 0 auto;
+}
+
+.btn-search {
+    background: #1E90FF;
+    border-radius: 0;
+    color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #00BFFF;
+    width: 50px;
+  }
+
+  .header-area{
+      width: 975px;
+  }
+
+  .weather{
+      color: black;
+  }
+#jumbo{
+    margin-top: -40px;
+}
+
+.col-md-9{
+    height: 270px;
+}
