@@ -1,6 +1,6 @@
 
 body{
-    width: 960px;
+    width: 980px;
     margin: 0 auto;
 }
 
@@ -15,16 +15,57 @@ body{
   }
 
   .header-area{
-      width: 975px;
+      width: 994px;
   }
 
   .weather{
       color: black;
   }
 #jumbo{
-    margin-top: -40px;
+    margin-top: 5px;
 }
 
 .col-md-9{
-    height: 270px;
+    height: 240px;
 }
+
+#showResult{
+    background: rgb(207, 6, 6);
+    color: white;
+    border-radius: 3px;
+    font-weight: bolder;
+}
+
+
+.col-md-2{
+    height: 170px;
+    background: #1E90FF;
+    color: white;
+    margin-left: 10px;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 40px;
+    
+}
+
+
+
+
+#forecastHeader{
+    margin-left: 256px;
+}
+
+#weatherForecast{
+   
+   margin-left: 245px;
+}
+button{
+    width: 222px;
+    background-color: #1E90FF;
+    color: white;
+}
+
+.col-md-3{
+    background: whitesmoke;
+}
+
