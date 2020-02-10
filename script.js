@@ -12,10 +12,11 @@
         var historyCities = JSON.parse(localStorage.getItem("historyCities"));
         if(historyCities != null) {
         historyCities.forEach(function(takeCity) {
-        $("#createHistory").append('<button (\'' + takeCity + '\')" >' + takeCity + '</button>');
+        $("#createHistory").append('<button id = "button"  (\'' + takeCity + '\')" >' + takeCity + '</button>');
                 
             });
         }
+       
 //Creating our history based on the user search  
         function createHistory(city) {
         var historyCities = [];
@@ -110,9 +111,11 @@
          }    
        });}}
 
+       //this is the function that we are call in current weather ajax call
           function showResults(data){
           return "<div><h2>"+data.name+""+"<img src='https://openweathermap.org/img/w/" + data.weather[0].icon+".png'> "+"("+date+ ") </h2></div>"+"<p>Temperature: "+data.main.temp+String.fromCharCode(176) + "F"+"</p>"+
           "<p>Humidity: "+data.main.humidity+"%</p>"+ "<p>Wind Speed: "+data.wind.speed+ " MPH</p>" ;
        }
           
 
+       
