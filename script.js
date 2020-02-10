@@ -1,155 +1,118 @@
  
-
-
-  $("#submitCity").click(function(){
-    
-    
-     city = $("#createHistory").val().trim();
-    var cityNameToUse = city;
-    console.log(city);
-  
-    return getWeather(cityNameToUse);
-    
-     
-    
-  });
-  var cities = JSON.parse(localStorage.getItem("cities"));
-  if(cities != null) {
-    cities.forEach(function(city) {
-      $("#createHistory").append('<button (\'' + city + '\')" >' + city + '</button>');
-          
-      });
-  }
-  
-  function createHistory(city) {
-    var cities = [];
-    
-    if (localStorage.getItem("cities") === null) {
-        cities.push(city);
-        localStorage.setItem("cities", JSON.stringify(cities).toUpperCase());
+//Starting of the weather app click event
+        $("#submitCity").click(function(){
+        var city = $("#createHistory").val().trim();
         
-    } else {
-// checking to make sure no repeat names on list while adding to list
-        cities = JSON.parse(localStorage.getItem("cities").toUpperCase() );
-        if (cities.indexOf(city) === -1) {
-            cities.push(city);
+
+//Calling the function that has ajax api call that will return the current date weather
+        return getWeather(city);
+        });
+
+//Getting all the cities from local storage using foreach function
+        var historyCities = JSON.parse(localStorage.getItem("historyCities"));
+        if(historyCities != null) {
+        historyCities.forEach(function(takeCity) {
+        $("#createHistory").append('<button (\'' + takeCity + '\')" >' + takeCity + '</button>');
+                
+            });
         }
+//Creating our history based on the user search  
+        function createHistory(city) {
+        var historyCities = [];
+        if (localStorage.getItem("historyCities") === null) {
+        historyCities.push(city);
+        localStorage.setItem("historyCities", JSON.stringify(historyCities));
+          
+        } else {
+// checking to make sure no repeat names on list while adding to list
+          historyCities = JSON.parse(localStorage.getItem("historyCities"));
+          if (historyCities.indexOf(city) === -1) {
+          historyCities.push(city);
+          }
 
-        localStorage.setItem("cities", JSON.stringify(cities).toUpperCase());
-    }
-}
+          localStorage.setItem("historyCities", JSON.stringify(historyCities));
+      }
+      }
 
-  
-$("button").on("click", function(event) {
-  if($(this).attr("type") === "city") {
-      event.preventDefault();
-      cityName = $(this).data("city");
-      console.log(cityName);
-      cityName = firstUpper(cityName);
-      getCityInfo(cityName);
-      display5Day(cityName);
-  }
-})
+//this fucntion will convert our input to uppercase before we save it to the local storage
+      function upperInput(e) {
+        var typingStart = e.target.selectionStart;
+        var typingEnd = e.target.selectionEnd;
+        e.target.value = e.target.value.toUpperCase();
+        e.target.selectionStart = typingStart;
+        e.target.selectionEnd = typingEnd;
+     }
 
+//Creating a date that we will use to diplay the current date 
+          var currentDate = new Date();
+          date = currentDate;
+          var dd = String(date.getDate()).padStart(2, '0');
+          var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+          var yyyy = date.getFullYear();
 
+//Will diplay date in in format (02/10/2020)
+          date = mm + '/' + dd + '/' + yyyy;
 
-//var date = document.getElementById("error//");
-var currentDate = new Date();
-date = currentDate;
-var dd = String(date.getDate()).padStart(2, '0');
-var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = date.getFullYear();
-
-date = mm + '/' + dd + '/' + yyyy;
-// document.write(date);
-
-function getWeather(city){
-     city = $("#city").val();
+//Ajax call that will use a city parameter to display the current city
+          function getWeather(city){
+          city = $("#city").val();
  
-    if (city != ""){
-        $.ajax({
-           url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=dae04c88751e48b8b6979d97b4cd33f9",
-           method: "GET",
-           dataType: "jsonp",
-           success: function(data){
-               console.log(data);
-               var result = showResults(data);
-               
-               $("#jumbo").html(result);
-               $("#city").val("");
-              
-               
+          if (city != ""){
+          $.ajax({
+          url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=dae04c88751e48b8b6979d97b4cd33f9",
+          method: "GET",
+          dataType: "jsonp",
+          success: function(data){
+          console.log(data);
+          var result = showResults(data);
+ 
+//Will dump over current weather result here and will remove the text from input field
+          $("#jumbo").html(result);
+          $("#city").val("");
 
-               var getLatitude = data.coord.lat;
-               var getLongitude = data.coord.lon;
-               $.ajax({
-             
-                 url:"https://api.openweathermap.org/data/2.5/uvi?lat="+getLatitude+"&lon="+getLongitude+"&appid=dae04c88751e48b8b6979d97b4cd33f9",
-                 method: "GET",
-                 
-                 success: function(response){
-                  $("#showResult").html("UV Index: " + response.value);      
-                 }  
-                 
-              }); 
-              createHistory(city);
-             
-             
-           } 
-           
+//Will dump our UV Index using this ajax call that are taking latitude and longitude parameter
+          $.ajax({   
+          url:"https://api.openweathermap.org/data/2.5/uvi?lat="+data.coord.lat+"&lon="+data.coord.lon+"&appid=dae04c88751e48b8b6979d97b4cd33f9",
+          method: "GET",
+          success: function(response){
+          $("#showResult").html("UV Index: " + response.value);      
+          }       
+          }); 
+          createHistory(city);  
+          }   
         });
           
-        var url = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=imperial&appid=dae04c88751e48b8b6979d97b4cd33f9";
-        console.log(url);
-        $.ajax({
-            url: url,
-            method: "GET",
-            success: function (forecast) {
-                var weatherData = forecast.list;
-                var count = 1;
-                var currentDateToUse = null;
-                  //only displayng 5 days forecast 
-                var currentDate = $("#dateToday").text().trim();
-                for (var i = 0; i < weatherData.length; i++) {
-                    var dateToUse = new Date(weatherData[i]["dt"] * 1000).toLocaleDateString("en-us");
-                    if (dateToUse != currentDate && dateToUse != currentDateToUse) {
-                        $("#future" + count.toString() +"Date").html(dateToUse);
-                        $("#future" + count.toString() + "Icon").attr("src", "http://openweathermap.org/img/w/" + weatherData[i]["weather"][0]["icon"] + ".png");
-                        $("#future" + count.toString() + "Temp").html("Temp: " + weatherData[i]["main"]["temp"] + String.fromCharCode(176) + "F" );
-                        $("#future" + count.toString() + "Hum").html("Humidity: " + weatherData[i]["main"]["humidity"] + "%");
-                        currentDateToUse = dateToUse;
-                        count += 1;
+          var url = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=imperial&appid=dae04c88751e48b8b6979d97b4cd33f9";
+          console.log(url);
+          $.ajax({
+          url: url,
+          method: "GET",
+          success: function (forecast) {
+          var start = 1;
+          var date = null;
+                  
+ //Using the for loop that will only show the 5 days forcast              
+          for (var i = 0; i < forecast.list.length; i++) {
+          var thisDate = new Date(forecast.list[i].dt * 1000).toLocaleDateString("en-us");
+          if (thisDate != currentDate && thisDate != date) {
+            $(".forecast" + start.toString() +"-date").html(thisDate);
+            $(".forecast" + start.toString() + "-icon").attr("src", "http://openweathermap.org/img/w/" + forecast.list[i].weather[0].icon + ".png");
+            $(".forecast" + start.toString() + "-temp").html("Temp: " + forecast.list[i].main.temp + String.fromCharCode(176) + "F" );
+            $(".forecast" + start.toString() + "-hum").html("Humidity: " + forecast.list[i].main.humidity + "%");
+            date = thisDate;
+            start += 1;
                         
-                    }
-                    
-                    
-                }
-               
-                
-                $("#showHide").css("display", "block");  
-    }
-    
-    
-    
-});}
+            }
+          }
 
-}
+//Will display the weather forecast 5 days once the forcast ajax call ran successfully that was set to display none before
+          $("#showHide").css("display", "block");  
+         }    
+       });}}
 
-
-function showResults(data){
-    return "<div><h2>"+data.name+""+"<img src='https://openweathermap.org/img/w/"+ data.weather[0].icon+".png'> "+"("+date+ ") </h2></div>"+"<p>Temperature: "+data.main.temp+" &deg;C</p>"+
-     "<p>Humidity: "+data.main.humidity+"%</p>"+ "<p>Wind Speed: "+data.wind.speed+ " MPH</p>" ;
-  
-}
-
-
-$("button").on("click", function(event) {
-  if($(this).attr("type") === "city") {
-      event.preventDefault();
-     
-      
-      getWeather(cityName);
-      
-  }
-})
+          function showResults(data){
+          return "<div><h2>"+data.name+""+"<img src='https://openweathermap.org/img/w/" + data.weather[0].icon+".png'> "+"("+date+ ") </h2></div>"+"<p>Temperature: "+data.main.temp+String.fromCharCode(176) + "F"+"</p>"+
+          "<p>Humidity: "+data.main.humidity+"%</p>"+ "<p>Wind Speed: "+data.wind.speed+ " MPH</p>" ;
+       }
+          
 

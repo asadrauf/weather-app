@@ -1,0 +1,14 @@
+
+
+/* responsive css that will support the app on multiple devices */
+@media only screen and (max-width: 766px){
+    #showHide{
+        width: 50%;
+        flex-direction: column;
+        display: flex;
+    }
+    #weatherForecast{
+        width: 50%;
+        display: flex;
+    }
+}

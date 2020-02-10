@@ -6,101 +6,108 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather App</title>
 
-    <!-- Link to bootstrap -->
+    <!-------------------Link to bootstrap------------------------->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- link to Custom CSS File -->
-    <link rel="stylesheet" href="style.css">
+   <!-------------------Link to Custom CSS------------------------->
+    <link rel="stylesheet" href="/css/style.css">
 
-     <!-------------------Link to FontAwsome------------------------->
-     <script src="https://kit.fontawesome.com/5c588c8e4c.js" crossorigin="anonymous"></script>
+    <!-------------------Link to Responsive CSS------------------------->
+    <link rel="stylesheet" href="/css/responsive.css">
+
+   <!-------------------Link to FontAwsome------------------------->
+    <script src="https://kit.fontawesome.com/5c588c8e4c.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+   <!-- main-container for our webpage that will hold everything inside it -->
     <section class="main-container" id="mainContaier">
-        <section class="header-area" id="headerArea">
-            <div class="row">
-            <div class="col-md-12 py-2">
-            <h2 class="header-text text-center text-light bg-dark py-4">Weather Dashboard</h2>
-            </div> 
-            </div> 
-        </section>
-        <section class="current-weather" id="currentWeather">
+
+   <!-------------------Header Area------------------------->
+    <section class="header-area" id="headerArea">
+       <div class="row">
+       <div class="col-md-12 py-2">
+       <h2 class="header-text text-center text-light bg-dark py-4">Weather Dashboard</h2>
+       </div> 
+       </div> 
+    </section>
+
+    <!-------------------Below code will contain our weather details------------------------->
+    <section class="current-weather" id="currentWeather">
             <div class="row" id="cityArea">
-                <div class="col-md-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="city" placeholder="Search for a City" style='text-transform:uppercase'>
-                          <span class="input-group-btn">
-                            <button class="btn btn-search" type="button" id="submitCity"><i class="fa fa-search fa-fw"></i></button>
-                          </span>
-                    </div>
-                    <div class="row">
-                        <ul class="col-md-3">
-                            
-                            <div id="createHistory">
-                                    
-                            </div>
-                        </ul>
-                        </div>
-                </div>
-                <div class="col-md-9 border border-right-0">
-                        <p id="jumbo"></p>
-                        <span id="showResult" class="show-result"></span>
-                    </div>
-                        
-                            
-                      </div><div><h3 id="date"></h3></div>
-                      
-        </section>
-        <div class="show-hide" id="showHide" style="display: none;">
-            
-        <div class ="col-md-12" id="forecastHeader" ><h4>5 Days Forecast:</span></div>
-        <section class="row col-md-10 weather-forecast" id="weatherForecast" >
-            
-                            <div class="col-md-2">
-                                <h5 id="first-Date"></h5>
-                                <img id="first-Icon" src=""></img>
-                                <p id="first-Temp"></p>
-                                <p id="first-Hum"></p>
-                            </div>
-                            <div class="col-md-2">
-                                <h5 id="second-Date"></h5>
-                                <img id="second-Icon" src=""></img>
-                                <p  id="second-Temp"></p>
-                                <p id="second-Hum"></p>
-                            </div>
-                            <div class="col-md-2">
-                                <h5 id="third-Date" ></h5>
-                                <img id="third-Icon" src=""></img>
-                                <p id="third-Temp"></p>
-                                <p id="third-Hum"></p>
-                            </div>
-                            <div class="col-md-2">
-                                <h5 id="future4Date"></h5>
-                                <img id="future4Icon" src=""></img>
-                                <p class="card-text" id="future4Temp"></p>
-                                <p id="future4Hum"></p>
-                            </div>
-                            <div class="col-md-2">
-                                <h5 class="card-title" id="future5Date" ></h5>
-                                <img id="future5Icon" src=""></img>
-                                <p id="future5Temp"></p>
-                                <p id="future5Hum"></p>
-                            </div>
-                        
-                    </section>
-                </div>
+            <div class="col-md-3">
+            <div class="input-group">
 
-                
-        </section>
+    <!-------------------Below is our input field------------------------->            
+            <input type="text" class="form-control" id="city" placeholder="Search for a City" oninput="upperInput(event)">
+            <span class="input-group-btn">
+            <button class="btn btn-search" type="button" id="submitCity"><i class="fa fa-search fa-fw"></i></button>
+            </span>
+            </div>
+            <div class="row">
+            <ul class="col-md-3">
+
+    <!-------------------Here we are creating our history based on user search------------------------->
+            <div id="createHistory">
+            </div></ul></div>
+            </div>
+            <div class="col-md-9 border border-right-0">
+            <p id="jumbo"></p>
+            <span id="showResult" class="show-result"></span>
+            </div>
+            </div>
+            <div><h3 id="date"></h3></div>          
+    </section>
+
+<!---End of our current weather and history area----->
+
+<!---Start of our wearher forecast area-------------->
+            <div class="show-hide" id="showHide" style="display: none;">
+            <div class ="col-md-12" id="forecastHeader" ><h4>5 Days Forecast:</span></div>
+            <section class="row col-md-10 weather-forecast" id="weatherForecast" >
+            <div class="col-md-2">
+            <h5 class="forecast1-date"></h5>
+            <img class="forecast1-icon" src=""></img>
+            <p class="forecast1-temp"></p>
+            <p class="forecast1-hum"></p>
+            </div>
+            <div class="col-md-2">
+           <h5 class="forecast2-date"></h5>
+           <img class="forecast2-icon" src=""></img>
+           <p  class="forecast2-temp"></p>
+           <p class="forecast2-hum"></p>
+           </div>
+           <div class="col-md-2">
+           <h5 class="forecast3-date" ></h5>
+           <img class="forecast3-icon" src=""></img>
+           <p class="forecast3-temp"></p>
+           <p class="forecast3-hum"></p>
+           </div>
+           <div class="col-md-2">
+           <h5 class="forecast4-date"></h5>
+           <img class="forecast4-icon" src=""></img>
+           <p class="forecast4-temp"></p>
+           <p class="forecast4-hum"></p>
+           </div>
+           <div class="col-md-2">
+           <h5 class="forecast5-date" ></h5>
+           <img class="forecast5-icon" src=""></img>
+           <p class="forecast5-temp"></p>
+           <p class="forecast5-hum"></p>
+           </div>
+    </section>
+           </div> 
+ <!---End of our weather forecast area----->                    
+    </section>
+ <!---Closing our main content area here----->   
     
-    
-
-
-
-    <!-- Link to JQuery Script -->
+ <!-- Link to JQuery Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Link to javaScript file -->
+ 
+ <!-- Link to javaScript file -->
     <script src="script.js"></script>
+
 </body>
 </html>
+
+<!---End----->

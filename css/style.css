@@ -1,9 +1,12 @@
 
+
+/* our css code for body */
 body{
     width: 980px;
     margin: 0 auto;
 }
 
+/* css for buttons */
 .btn-search {
     background: #1E90FF;
     border-radius: 0;
@@ -14,12 +17,13 @@ body{
     width: 50px;
   }
 
-  .header-area{
-      width: 994px;
+  /* css for title */
+.header-area{
+    width: 994px;
   }
 
-  .weather{
-      color: black;
+.weather{
+    color: black;
   }
 #jumbo{
     margin-top: 5px;
@@ -28,7 +32,7 @@ body{
 .col-md-9{
     height: 240px;
 }
-
+/* css for UV Index */
 #showResult{
     background: rgb(207, 6, 6);
     color: white;
@@ -48,9 +52,6 @@ body{
     
 }
 
-
-
-
 #forecastHeader{
     margin-left: 256px;
 }
@@ -68,4 +69,6 @@ button{
 .col-md-3{
     background: whitesmoke;
 }
+
+
 
